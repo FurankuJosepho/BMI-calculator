@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>BMI Calculator</title>
+    <style>
+        .container{
+            background-color: rgba(22, 22, 22, 0.925);
+            height: 600px;
+            width: 700px;
+            border-radius: 10px;
+            margin-top: 50px;
+        }
+        h1{
+            text-align: center;
+            margin: 10px;
+        }
+        .Weight2,
+        .Height2,
+        .Age2,
+        .Gender2,
+        .button {
+            text-align: center;
+        }
+        .Gender3 {
+            text-align: end;
+        }
+        .Age,
+        .Weight,
+        .Height,
+        .Gender {
+            margin: 7px 100px;
+            background-color: antiquewhite;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        .Age3 {
+            margin-left: 32px;
+        }
+        label{
+            font-weight: bolder;
+        }
+        input{
+            padding: 5px;
+            border: none;
+            border-radius: 10px;
+            text-align: center;
+        }
+        button {
+            margin-top: 20px;
+        }
+        .results {
+            text-align: center;
+            margin-top: 10px;
+        }
+        #Underweight{
+            color: rgba(236, 236, 11, 0.815);
+        }
+        #Normal{
+            color: rgba(1, 165, 1, 0.856);
+        }
+        #Overweight {
+            color: rgba(241, 161, 12, 0.904);
+        }
+        #Obese {
+            color: rgba(226, 4, 4, 0.856);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-light">BMI Calculator</h1>
+        <div class="row Age">
+            <div class="col Age2">
+                <label for="Age">Age</label>
+            </div>
+            <div class="row">
+                <div class="col Age2 Age3">
+                    <input type="number" id="myAge">
+                </div>
+            </div>
+        </div>
+        <div class="row Weight">
+            <div class="col Weight2">
+                <label for="Weight">Weight (kg)</label>
+            </div>
+            <div class="col">
+                <input type="number" id="myWeight">
+            </div>
+        </div>
+        <div class="row Height">
+            <div class="col Height2">
+                <label for="Weight">Height (cm)</label>
+            </div>
+            <div class="col">
+                <input type="number" id="myHeight">
+            </div>
+        </div>
+        <div class="row Gender">
+            <div class="col Gender2">
+                <label for="Gender">Gender</label>
+            </div>
+            <div class="row">
+                <div class="col Gender3">
+                    <input type="checkbox">
+                    <label for="Male">Male</label>
+                </div>
+                <div class="col Gender4">
+                    <input type="checkbox">
+                    <label for="Male">Female</label>
+                </div>
+            </div>
+        </div>
+        <div class="button">
+            <button class="btn btn-danger" onclick="myBmi()">Campute</button>
+            <button class="btn btn-danger" onclick="reload()">Reset</button>
+        </div>
+        <div class="results">
+            <h6 class="text-light">your BMI result here:</h6>
+            <h5 id="result" class="text-light"></h5>
+            <h5 id="Underweight"></h5>
+            <h5 id="Normal"></h5>
+            <h5 id="Overweight"></h5>
+            <h5 id="Obese"></h5>
+        </div>
+    </div>
+
+    <script>
+        function myBmi() {
+            let userAge = document.getElementById("myAge");
+            let userWeight = document.getElementById("myWeight").value;
+            let userHeight = document.getElementById("myHeight").value;
+
+            if (userWeight === "" | userHeight === "" | userAge === ""){
+                alert("Please fill up the form")
+            } else {
+                let bmiResult = userWeight / ((userHeight / 100) * (userHeight / 100));
+                bmiResult = bmiResult.toFixed(2);
+                if (bmiResult < 18.4 ){
+                    document.getElementById('result').innerHTML ="Your BMI result is " + bmiResult;
+                    document.getElementById('Underweight').innerHTML ="You are Underweight";
+                }else if(bmiResult >= 18.5 && bmiResult <= 24.9){
+                    document.getElementById('result').innerHTML ="Your BMI result is " + bmiResult;
+                    document.getElementById('Normal').innerHTML ="You are Normal";
+                }else if(bmiResult >= 25.0 && bmiResult <= 39.9){
+                    document.getElementById('result').innerHTML ="Your BMI result is " + bmiResult;
+                    document.getElementById('Overweight').innerHTML ="You are Overweight";
+                }else {
+                    document.getElementById('result').innerHTML ="Your BMI result is " + bmiResult;
+                    document.getElementById('Obese').innerHTML ="You are Obese";
+                }
+            }
+        }
+        function reload() {
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>
